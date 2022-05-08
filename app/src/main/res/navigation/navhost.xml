@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navhost"
+    app:startDestination="@id/patchFragment">
+    <fragment
+        android:id="@+id/addPatchFragment"
+        android:name="com.example.augmentedme.Fragment.AddPatchFragment"
+        android:label="fragment_add_patch"
+        tools:layout="@layout/fragment_add_patch" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.augmentedme.Fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_updateProfileFragment"
+            app:destination="@id/updateProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patchFragment"
+        android:name="com.example.augmentedme.Fragment.PatchFragment"
+        android:label="fragment_patch"
+        tools:layout="@layout/patches" >
+        <action
+            android:id="@+id/action_patchFragment_to_detailsPatchFragment"
+            app:destination="@id/detailsPatchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsPatchFragment"
+        android:name="com.example.augmentedme.Fragment.detailsPatchFragment"
+        android:label="fragment_details_patch"
+        tools:layout="@layout/fragment_details_patch" >
+        <argument android:name="id_patch"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.example.augmentedme.Fragment.updateProfileFragment"
+        android:label="fragment_update_profile"
+        tools:layout="@layout/fragment_update_profile" >
+        <action
+            android:id="@+id/action_updateProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+</navigation>

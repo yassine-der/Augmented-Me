@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/drawable/round_bg.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/drawable/round_border.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/drawable/round_petit.xml" value="0.20307692307692307" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/drawable/round_up.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/drawable/up_border.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/activity_main_activityhome.xml" value="0.16568047337278108" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/activity_register.xml" value="0.178125" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/activity_splash_screen.xml" value="0.1721014492753623" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/activity_unity.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/calendrier.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/cart_patch.xml" value="0.264" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/fragment_add_patch.xml" value="0.264" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/fragment_details_patch.xml" value="0.2" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/fragment_patch.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/fragment_profile.xml" value="0.23777173913043478" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/fragment_update_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/layout/patches.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/yassine derbel/AugmentedMe/app/src/main/res/menu/menu0.xml" value="0.2078125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
