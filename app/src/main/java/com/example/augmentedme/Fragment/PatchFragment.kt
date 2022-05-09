@@ -1,6 +1,7 @@
 package com.example.augmentedme.Fragment
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.GridView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,6 +31,8 @@ class PatchFragment : Fragment(), AdapterView.OnItemClickListener{
     lateinit var equipeBaseAdapter : patchBaseAdapter
     lateinit var buttonGridAddEquipe : Button
     lateinit var id_patch : String
+    lateinit var mSharedPref : SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +54,7 @@ class PatchFragment : Fragment(), AdapterView.OnItemClickListener{
                 gridEquipe.onItemClickListener = this@PatchFragment
 
             } else {
-                Toast.makeText(context, "Error in getting list", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Error in getting list", Toast.LENGTH_SHORT).show()
             }
         })
         viewModel.makeApiCall2(context)
@@ -61,42 +65,20 @@ class PatchFragment : Fragment(), AdapterView.OnItemClickListener{
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         var patch : Patch = arrayList!!.get(position)
-        Toast.makeText(context, "Error in getting list", Toast.LENGTH_SHORT).show()
 
-        id_patch = patch._id!!
-        val apiInterface = RetrofiteInstance.api(context)
+        mSharedPref = requireActivity().getSharedPreferences("LOGIN_PREF", AppCompatActivity.MODE_PRIVATE);
 
-        var patch1 = Patch()
+        mSharedPref.edit().apply{
+            putString("PATCHID",null)
 
-        apiInterface.doUpPatch(
-            id_patch
-        ).enqueue(object :
-            Callback<Patch> {
+        }.apply()
 
-            override fun onResponse(call: Call<Patch>, response: Response<Patch>) {
-
-                val passage = response.body()
+                val action = PatchFragmentDirections.actionPatchFragmentToDetailsPatchFragment(patch._id.toString())
+                findNavController().navigate(action)
 
 
 
-                Toast.makeText(context, "Update Success", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context!!, unityActivity::class.java)
-                startActivity(intent)
 
-
-            }
-
-            override fun onFailure(call: Call<Patch>, t: Throwable) {
-
-                Toast.makeText(context, "Connexion error!", Toast.LENGTH_SHORT).show()
-
-            }
-
-        })
-
-
-        val action = PatchFragmentDirections.actionPatchFragmentToDetailsPatchFragment(id_patch)
-        findNavController().navigate(action)
 
 
 

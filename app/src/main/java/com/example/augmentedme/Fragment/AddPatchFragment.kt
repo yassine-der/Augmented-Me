@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.augmentedme.Model.Patch
 import com.example.augmentedme.R
 import com.example.augmentedme.api.RetrofiteInstance
@@ -75,7 +76,13 @@ class AddPatchFragment : Fragment() {
         fab2.setOnClickListener{
             pickImageFromGallery()
         }
+
         addPatchButton.setOnClickListener {
+            if (selectedImageUri0 == null) {
+                Toast.makeText(context!!, "Select an Image First ", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
 
             val nom = nameEditText.text.toString().trim()
             val description = descriptionEditText.text.toString().trim()
@@ -86,7 +93,6 @@ class AddPatchFragment : Fragment() {
             doAddPatch(
                 nom,description,date
             )
-            //print(parcelFileDescriptor);
         }
 
 
@@ -100,11 +106,7 @@ class AddPatchFragment : Fragment() {
     private fun doAddPatch(nom: String, description: String, date: String){
         if (validate()) {
 
-            if (selectedImageUri0 == null) {
-                println("image null")
 
-                return
-            }
 
 
             //val stream = contentResolver.openInputStream(selectedImageUri0!!)
@@ -151,6 +153,8 @@ class AddPatchFragment : Fragment() {
                             //findNavController().navigate(action)
                             nameEditText.clearComposingText()
                             descriptionEditText.clearComposingText()
+                            val action = AddPatchFragmentDirections.actionAddPatchFragmentToPatchFragment()
+                            findNavController().navigate(action)
 
 
                         } else {
@@ -186,11 +190,15 @@ class AddPatchFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK && data != null) {
             selectedImageUri0 = data?.data
 
             imagePicker0?.setImageURI(selectedImageUri0)
             fab2.hide()
+
+        }
+        else{
+            Toast.makeText(context!!, "image null ", Toast.LENGTH_SHORT).show()
 
         }
     }    private fun validate(): Boolean {

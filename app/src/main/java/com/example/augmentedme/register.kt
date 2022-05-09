@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.service.controls.ControlsProviderService
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -53,7 +56,6 @@ class register : AppCompatActivity() {
         usertNameUpdate = findViewById(R.id.usernamee)
         passwordUpdate = findViewById(R.id.motdepassse2)
         confirmePasswordUpdate = findViewById(R.id.motdePasse)
-        passwordUpdate = findViewById(R.id.inputPassword222)
         registerButton = findViewById(R.id.btnAdd111)
         imagePicker = findViewById(R.id.imageView666)
         fab = findViewById(R.id.floatingActionButton252)
@@ -71,6 +73,10 @@ class register : AppCompatActivity() {
             val confirmPassword = confirmePasswordUpdate.text.toString().trim()
 
 
+            if (selectedImageUri == null) {
+                Toast.makeText(this@register, "Select an Image First ", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val parcelFileDescriptor = contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return@setOnClickListener
             doRegister(
@@ -88,6 +94,8 @@ private fun doRegister(nom: String, prenom: String, email: String, motdepasse: S
 
         if (selectedImageUri == null) {
             println("image null")
+            Toast.makeText(this@register, "image null ", Toast.LENGTH_SHORT).show()
+
 
             return
         }
@@ -133,6 +141,7 @@ private fun doRegister(nom: String, prenom: String, email: String, motdepasse: S
                         Log.i("onResponse goooood", response.body().toString())
                         //showAlertDialog()
                         Toast.makeText(this@register, "welcome ", Toast.LENGTH_SHORT).show()
+                        navigateRegister()
 
                     } else {
                         Log.i("OnResponse not good", response.body().toString())
@@ -169,6 +178,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         imagePicker?.setImageURI(selectedImageUri)
         fab.hide()
 
+    }else{
+        Toast.makeText(this@register, "image null ", Toast.LENGTH_SHORT).show()
+
     }
 }
 
@@ -179,18 +191,22 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 
 
     private fun validate(): Boolean {
+        selectedImageUri?:  Toast.makeText(this@register, "image null ", Toast.LENGTH_SHORT).show()
+
+
         lastNameUpdate.error = null
         usertNameUpdate.error = null
         confirmePasswordUpdate.error = null
         firstNameUpdate.error = null
         passwordUpdate.error = null
 
-        if (lastNameUpdate.text!!.isEmpty()) {
-            lastNameUpdate.error = getString(R.string.mustNotBeEmpty)
-            return false
-        }
         if (firstNameUpdate.text!!.isEmpty()) {
             firstNameUpdate.error = getString(R.string.mustNotBeEmpty)
+            return false
+        }
+
+        if (lastNameUpdate.text!!.isEmpty()) {
+            lastNameUpdate.error = getString(R.string.mustNotBeEmpty)
             return false
         }
         if (confirmePasswordUpdate.text!!.isEmpty()) {
@@ -207,8 +223,43 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
             passwordUpdate.error = getString(R.string.mustNotBeEmpty)
             return false
         }
+        // checking minimum password Length
+        if (passwordUpdate.text.length < 8) {
+            passwordUpdate.setError("Password Length must be more than " + 8 + "characters")
+            return false
+        }
+
+        // Checking if repeat password is same
+        if (!passwordUpdate.text.toString().equals(confirmePasswordUpdate.text.toString())) {
+            confirmePasswordUpdate.setError("Password does not match")
+            return false
+        }
 
         return true
     }
+
+    private fun navigateRegister(){
+        val l = Intent(this,Login::class.java)
+        startActivity(l)
+        finish()
+
+    }
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val view: View? = currentFocus
+        if (view != null && (ev.getAction() === MotionEvent.ACTION_UP || ev.getAction() === MotionEvent.ACTION_MOVE) && view is EditText
+        ) {
+            val scrcoords = IntArray(2)
+            view.getLocationOnScreen(scrcoords)
+            val x: Float = ev.getRawX() + view.getLeft() - scrcoords[0]
+            val y: Float = ev.getRawY() + view.getTop() - scrcoords[1]
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) (this.getSystemService(
+                INPUT_METHOD_SERVICE
+            ) as InputMethodManager).hideSoftInputFromWindow(
+                this.window.decorView.applicationWindowToken, 0
+            )
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
 
 }

@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val  rootView = inflater.inflate(R.layout.fragment_profile, container, false)
+        val  rootView = inflater.inflate(R.layout.profile, container, false)
         nom = rootView.findViewById(R.id.profileNom)
         prenom = rootView.findViewById(R.id.profilePrenom)
         email = rootView.findViewById(R.id.profileEmail)
@@ -64,7 +64,9 @@ class ProfileFragment : Fragment() {
                     nom.text = user.nom
                     prenom.text = user.prenom
                     email.text = user.userName
-                    //Glide.with(this@Profile).load(RetrofiteInstance.BASE_URL + user.image).into(imageView)
+                    val replaced = user.image!!.replace("\\", "/")
+
+                    Glide.with(this@ProfileFragment).load(RetrofiteInstance.BASE_URL + replaced).into(imageView)
 
 
                 }

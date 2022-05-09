@@ -6,7 +6,7 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
         flatDir {
             //dirs "${project(':unityLibrary').projectDir}/libs"
-            dirs 'C:\\Users\\yassine derbel\\Desktop\\autofocus\\unityLibrary\\libs'
+            dirs 'C:\\Users\\yassine derbel\\Desktop\\opo\\unityLibrary\\libs'
 
         }
 
@@ -17,5 +17,5 @@ include ':app'
 
 
 include ':unityLibrary'
-project(':unityLibrary').projectDir=new File('C:\\Users\\yassine derbel\\Desktop\\autofocus\\unityLibrary')
+project(':unityLibrary').projectDir=new File('C:\\Users\\yassine derbel\\Desktop\\opo\\unityLibrary')
 

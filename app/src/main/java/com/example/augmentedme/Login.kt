@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -62,7 +64,6 @@ class Login : AppCompatActivity() {
         loginButton.setOnClickListener {
             doLogin()
         }
-        hideKeyboard(this)
 
     }
 
@@ -164,18 +165,22 @@ class Login : AppCompatActivity() {
         finish()
 
     }
-    fun hideKeyboard(activity: Activity) {
-        val inputMethodManager =
-            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-        val currentFocusedView = activity.currentFocus
-        currentFocusedView?.let {
-            inputMethodManager.hideSoftInputFromWindow(
-                currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val view: View? = currentFocus
+        if (view != null && (ev.getAction() === MotionEvent.ACTION_UP || ev.getAction() === MotionEvent.ACTION_MOVE) && view is EditText
+        ) {
+            val scrcoords = IntArray(2)
+            view.getLocationOnScreen(scrcoords)
+            val x: Float = ev.getRawX() + view.getLeft() - scrcoords[0]
+            val y: Float = ev.getRawY() + view.getTop() - scrcoords[1]
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) (this.getSystemService(
+                INPUT_METHOD_SERVICE
+            ) as InputMethodManager).hideSoftInputFromWindow(
+                this.window.decorView.applicationWindowToken, 0
             )
         }
+        return super.dispatchTouchEvent(ev)
     }
-
 
 
 }

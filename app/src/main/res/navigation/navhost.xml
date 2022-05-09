@@ -7,13 +7,17 @@
     <fragment
         android:id="@+id/addPatchFragment"
         android:name="com.example.augmentedme.Fragment.AddPatchFragment"
-        android:label="fragment_add_patch"
-        tools:layout="@layout/fragment_add_patch" />
+        android:label="Add patch"
+        tools:layout="@layout/fragment_add_patch" >
+        <action
+            android:id="@+id/action_addPatchFragment_to_patchFragment"
+            app:destination="@id/patchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.augmentedme.Fragment.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        android:label="Profile"
+        tools:layout="@layout/profile" >
         <action
             android:id="@+id/action_profileFragment_to_updateProfileFragment"
             app:destination="@id/updateProfileFragment" />
@@ -21,7 +25,7 @@
     <fragment
         android:id="@+id/patchFragment"
         android:name="com.example.augmentedme.Fragment.PatchFragment"
-        android:label="fragment_patch"
+        android:label="Patches"
         tools:layout="@layout/patches" >
         <action
             android:id="@+id/action_patchFragment_to_detailsPatchFragment"
@@ -30,7 +34,7 @@
     <fragment
         android:id="@+id/detailsPatchFragment"
         android:name="com.example.augmentedme.Fragment.detailsPatchFragment"
-        android:label="fragment_details_patch"
+        android:label="Details"
         tools:layout="@layout/fragment_details_patch" >
         <argument android:name="id_patch"
             app:argType="string" />
@@ -38,7 +42,7 @@
     <fragment
         android:id="@+id/updateProfileFragment"
         android:name="com.example.augmentedme.Fragment.updateProfileFragment"
-        android:label="fragment_update_profile"
+        android:label="Update profile"
         tools:layout="@layout/fragment_update_profile" >
         <action
             android:id="@+id/action_updateProfileFragment_to_profileFragment"

@@ -39,6 +39,12 @@ interface apiService {
         @PUT("patch/{id}")
         fun doUpPatch(@Path("id") id : String):Call<Patch>
 
+        @PUT("patch/x/{id}")
+        fun doUpPatchx(@Path("id") id : String):Call<Patch>
+
+        @PUT("patch/y/{id}")
+        fun doUpPatchy(@Path("id") id : String):Call<Patch>
+
         @GET("user/{id}")
         fun getProfile(@Path("id") id : String):Call<User>
 

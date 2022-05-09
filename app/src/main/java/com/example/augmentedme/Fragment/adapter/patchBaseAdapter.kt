@@ -28,11 +28,13 @@ class patchBaseAdapter (var context: Context, var arrayList: List<Patch>): BaseA
         var view : View = View.inflate(context, R.layout.cart_patch,null)
 
         var logo : ImageView = view.findViewById(R.id.imageEquiperecycle88)
-        var nom: TextView =view.findViewById(R.id.nomEquipeRecycle88)
+        var nom: TextView =view.findViewById(R.id.textView88)
+        var date: TextView =view.findViewById(R.id.nomEquipeRecycle88)
 
         var equipe : Patch = arrayList.get(position)
 
         nom.text = equipe.nom
+        date.text = equipe.date
         val replaced = equipe.image!!.replace("\\", "/")
 
         Glide.with(view).load(RetrofiteInstance.BASE_URL + replaced).into(logo)
